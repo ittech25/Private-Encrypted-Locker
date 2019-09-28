@@ -10,7 +10,7 @@ $extension = (Get-Content -Path $dir\settings.db -TotalCount 2)[-1]
 
 Get-Content -Path "$dir\version"
 
-Import-Module $dir\encrypt.psm1 3>$null
+Import-Module $dir\enc.psm1 3>$null
 
 # Check if key exists for Target PC.
 if(!(Test-Path $lockerkeys\"$pcname".key)){

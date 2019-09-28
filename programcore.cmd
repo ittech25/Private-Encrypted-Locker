@@ -3,11 +3,10 @@ mode con:cols=80 lines=30
 setlocal EnableDelayedExpansion
 set count=1
 for /f "tokens=*" %%a in (settings.db) do (
-if !count! == 2 (set "extension=%%a" & goto :next)
+if !count! == 2 (set "extension=%%a" & GOTO :CONTIN)
 set /a count+=1
 )
-:next
-echo "%extension%"
+:CONTIN
 if NOT EXIST "%UserProfile%\Desktop\Locker\" GOTO SETUP
 if EXIST "%UserProfile%\Desktop\Locker\*.%extension%" GOTO CHECKKEY
 if NOT EXIST "%UserProfile%\Desktop\Locker\*.%extension%" GOTO LOCK
@@ -15,7 +14,6 @@ if NOT EXIST "%UserProfile%\Desktop\Locker\*.%extension%" GOTO LOCK
 mkdir %UserProfile%\Desktop\Locker >NUL 2>NUL
 >nul 2>nul dir /a-d "%UserProfile%\Desktop\Locker\*" && (powershell.exe -executionpolicy bypass "%~dp0\lock.ps1") && (attrib +s +h %UserProfile%\Desktop\Locker) || (echo No files found in Locker..)
 echo.
-echo "%extension%"
 echo Encryption Process... DONE
 echo.
 echo.
@@ -30,7 +28,6 @@ powershell.exe -executionpolicy bypass "%~dp0\unlock.ps1"
 attrib -s -h %UserProfile%\Desktop\Locker >NUL
 echo Decryption Process... DONE
 echo.
-echo "%extension%"
 echo.
 echo Press Any key to Close Window..
 pause >NUL

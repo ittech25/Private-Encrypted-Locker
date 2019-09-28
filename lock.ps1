@@ -3,7 +3,7 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 $desktop = [Environment]::GetFolderPath("Desktop")
 $templockdir = "$desktop\Locker"
-$unlockedfiles = Get-ChildItem -Path "$templockdir" -Include "*.exe", "*.dll", "*.txt", "*.zip", "*.7z", "*.doc", "*.docx", "*.wpd", "*.gz", "*.lnk", "*.xlsm", "*.xlsx", "*.csv", "*.ppt", "*.pptx", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.mp3", "*.wav", "*.midi", "*.pdf"  -Recurse
+$unlockedfiles = Get-ChildItem -Path "$templockdir" -Include "*.exe", "*.dll", "*.txt", "*.zip", "*.7z", "*.doc", "*.docx", "*.wpd", "*.gz", "*.lnk", "*.xlsm", "*.xlsx", "*.csv", "*.ppt", "*.pptx", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.mp3", "*.wav", "*.midi", "*.pdf" -Recurse
 $pcname = $env:computername
 $lockerkeys = "$dir\lockerkeys"
 $extension = (Get-Content -Path $dir\settings.db -TotalCount 2)[-1]
@@ -12,7 +12,7 @@ $extension = (Get-Content -Path $dir\settings.db -TotalCount 2)[-1]
 Get-Content -Path "$dir\version"
 
 #Import AES Encryption/Decryption/Key source to Script.
-Import-Module $dir\encrypt.psm1 3>$null
+Import-Module $dir\enc.psm1 3>$null
 
 
 # Create Key Folder if None exists.
