@@ -3,9 +3,10 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 $desktop = [Environment]::GetFolderPath("Desktop") 
 $templockdir = "$desktop\Locker"
-$lockedfiles = Get-ChildItem -Path "$templockdir" -Include "*.L0ck3D" -Recurse
+$lockedfiles = Get-ChildItem -Path "$templockdir" -Include "*$extension" -Recurse
 $pcname = $env:computername
 $lockerkeys = "$dir\lockerkeys"
+$extension = (Get-Content -Path $dir\settings.db -TotalCount 2)[-1]
 
 Get-Content -Path "$dir\version"
 
@@ -26,7 +27,7 @@ Write-Host "Decrypting Files... Please Wait.."
 write-host "`n"
 Write-Host "DO NOT TURN EXIT PROGRAM OR RISK LOSSING DATA WHILE DECRYPTING!!"
 write-host "`n"
-Decrypt-File $lockedfiles -Key $key -Suffix '.L0ck3D'
+Decrypt-File $lockedfiles -Key $key -Suffix ".$extension"
 }
 
 exit

@@ -6,6 +6,7 @@ $templockdir = "$desktop\Locker"
 $unlockedfiles = Get-ChildItem -Path "$templockdir" -Include "*.exe", "*.dll", "*.txt", "*.zip", "*.7z", "*.doc", "*.docx", "*.wpd", "*.gz", "*.lnk", "*.xlsm", "*.xlsx", "*.csv", "*.ppt", "*.pptx", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.mp3", "*.wav", "*.midi", "*.pdf"  -Recurse
 $pcname = $env:computername
 $lockerkeys = "$dir\lockerkeys"
+$extension = (Get-Content -Path $dir\settings.db -TotalCount 2)[-1]
 
 
 Get-Content -Path "$dir\version"
@@ -39,6 +40,6 @@ Write-Host "Encrypting Files... Please Wait.."
 write-host "`n"
 Write-Host "DO NOT TURN EXIT PROGRAM OR RISK LOSSING DATA WHILE ENCRYPTING!!"
 write-host "`n"
-Encrypt-File $unlockedfiles -Key $key -Suffix '.L0ck3D'
+Encrypt-File $unlockedfiles -Key $key -Suffix ".$extension"
 
 exit
