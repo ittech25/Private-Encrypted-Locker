@@ -12,7 +12,7 @@ Target OS: Windows 7/8/10
 
 Encryption Process Details:
  - Run the "RUN.CMD", The script will create a "Locker" folder on the Desktop.
- - Script Generates a Uniquely Generated AES Key to a Key file with the PC Name in the "lockerkeys" folder where PrivLocker.cmd is.
+ - Script Generates a Uniquely Generated AES Key to a Key file with the PC Name in the "lockerkeys" folder where RUN.CMD is.
  - Store any file in the "Locker" Folder you want Encrypted.
  - Run "RUN.CMD", The Encryption will take place.
  - ## DO NOT EXIT/CLOSE THE PROGRAM OR REMOVE THE USB! YOU HAVE BEEN WARNED!
