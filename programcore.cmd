@@ -1,6 +1,6 @@
 @echo off
+dpath=%~dp0
 mode con:cols=80 lines=30
-setlocal EnableDelayedExpansion
 set count=1
 for /f "tokens=*" %%a in (settings.db) do (
 if !count! == 2 (set "extension=%%a" & GOTO :CONTIN)
@@ -21,7 +21,9 @@ echo Press Any key to Close Window..
 pause >NUL
 exit /B
 :CHECKKEY
+if NOT EXIST "%~dp0\lockerkeys" GOTO 
 if EXIST "%~dp0\lockerkeys\%COMPUTERNAME%.key" GOTO UNLOCK
+
 exit /B
 :UNLOCK
 powershell.exe -executionpolicy bypass "%~dp0\unlock.ps1"

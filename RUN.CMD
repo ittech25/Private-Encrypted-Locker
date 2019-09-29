@@ -1,7 +1,9 @@
 @echo off
 mode con:cols=75 lines=28
 setlocal EnableDelayedExpansion
-IF EXIST "%~dp0\lockerkeys\*.key" GOTO YES
+IF EXIST "%~dp0\lockerkeys\*.key" GOTO ASK2
+IF NOT EXIST "%~dp0\lockerkeys\*.key" GOTO CONSENT
+:CONSENT
 echo By using Private-Locker Software, the User assumes all risks associated 
 echo with the use of this Software, including any risk to User's computer, 
 echo software or data being damaged by any virus, software, or any other file
@@ -43,20 +45,43 @@ IF /I "%INPUT%"=="q" GOTO EXIT
 IF /I "%INPUT%"=="qu" GOTO EXIT
 IF /I "%INPUT%"=="qui" GOTO EXIT
 IF /I "%INPUT%"=="quit" GOTO EXIT
-echo You MUST Agree to the Terms to use this tool!
+echo You MUST Agree to the Terms to use this tool.
 timeout /t 2 /NOBREAK >NUL
 GOTO ASK
+
+:ASK2
+set INPUT2=
+set /P INPUT2="Launch Private-Locker's Encrypt Locker?.. (Y/N or E to Exit)  "
+IF /I "%INPUT2%"=="y" GOTO YES 
+IF /I "%INPUT2%"=="n" GOTO EXIT
+IF /I "%INPUT2%"=="yes" GOTO YES 
+IF /I "%INPUT2%"=="no" GOTO EXIT
+IF /I "%INPUT2%"=="ye" GOTO YES
+IF /I "%INPUT2%"=="agree" GOTO YES 
+IF /I "%INPUT2%"=="disagree" GOTO EXIT
+IF /I "%INPUT2%"=="e" GOTO EXIT
+IF /I "%INPUT2%"=="ex" GOTO EXIT
+IF /I "%INPUT2%"=="exi" GOTO EXIT
+IF /I "%INPUT2%"=="exit" GOTO EXIT
+IF /I "%INPUT2%"=="q" GOTO EXIT
+IF /I "%INPUT2%"=="qu" GOTO EXIT
+IF /I "%INPUT2%"=="qui" GOTO EXIT
+IF /I "%INPUT2%"=="quit" GOTO EXIT
+echo You MUST choose to use this tool.
+timeout /t 2 /NOBREAK >NUL
+GOTO ASK2
+
 :YES
 call "%~dp0\programcore.cmd"
 exit /b
 
 :NO
-echo You MUST Agree to the Terms to use this tool!
+echo You MUST Agree to the Terms to use this tool.
 timeout /t 2 /NOBREAK >NUL
 GOTO ASK
 exit /b
 
 :EXIT
-echo Thank you for using this Tool!
+echo Thank you for using this Tool.
 timeout /t 2 /NOBREAK >NUL
 exit /b
