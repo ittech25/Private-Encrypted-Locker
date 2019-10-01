@@ -3,7 +3,7 @@ dpath=%~dp0
 mode con:cols=80 lines=30
 set count=1
 for /f "tokens=*" %%a in (settings.db) do (
-if !count! == 2 (set "extension=%%a" & GOTO :CONTIN)
+if !count! == 2 (set "extension=%%a" & GOTO :CONTIN )
 set /a count+=1
 )
 :CONTIN
@@ -11,7 +11,7 @@ if NOT EXIST "%UserProfile%\Desktop\Locker\" GOTO SETUP
 if EXIST "%UserProfile%\Desktop\Locker\*.%extension%" GOTO CHECKKEY
 if NOT EXIST "%UserProfile%\Desktop\Locker\*.%extension%" GOTO LOCK
 :LOCK
-mkdir %UserProfile%\Desktop\Locker >NUL 2>NUL
+mkdir "%UserProfile%\Desktop\Locker" >NUL 2>NUL
 >nul 2>nul dir /a-d "%UserProfile%\Desktop\Locker\*" && (powershell.exe -executionpolicy bypass "%~dp0\lock.ps1") && (attrib +s +h %UserProfile%\Desktop\Locker) || (echo No files found in Locker..)
 echo.
 echo Encryption Process... DONE
@@ -23,11 +23,10 @@ exit /B
 :CHECKKEY
 if NOT EXIST "%~dp0\lockerkeys" GOTO 
 if EXIST "%~dp0\lockerkeys\%COMPUTERNAME%.key" GOTO UNLOCK
-
 exit /B
 :UNLOCK
 powershell.exe -executionpolicy bypass "%~dp0\unlock.ps1"
-attrib -s -h %UserProfile%\Desktop\Locker >NUL
+attrib -s -h "%UserProfile%\Desktop\Locker" >NUL
 echo Decryption Process... DONE
 echo.
 echo.
@@ -36,7 +35,7 @@ pause >NUL
 exit /B
 :SETUP
 @echo off
-mkdir %UserProfile%\Desktop\Locker >NUL
+mkdir "%UserProfile%\Desktop\Locker" >NUL
 echo.
 echo.
 echo.
