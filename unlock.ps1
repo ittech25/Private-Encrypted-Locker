@@ -3,11 +3,11 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 $desktop = [Environment]::GetFolderPath("Desktop") 
 $templockdir = "$desktop\Locker"
+$extension = (Get-Content -Path "$dir\settings.db" -TotalCount 2)[-1]
 $lockedfiles = Get-ChildItem -Path "$templockdir" -Include "*$extension" -Recurse
 $pcname = $env:computername
 $lockerkeys = "$dir\lockerkeys"
 $pclockerkey = "$lockerkeys\$pcname.key"
-$extension = (Get-Content -Path "$dir\settings.db" -TotalCount 2)[-1]
 
 Get-Content -Path "$dir\version"
 

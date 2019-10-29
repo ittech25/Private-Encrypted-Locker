@@ -21,7 +21,8 @@ echo Press Any key to Close Window..
 pause >NUL
 exit /B
 :CHECKKEY
-if NOT EXIST "%~dp0\lockerkeys" GOTO 
+REM Changed for BashBunny Integration
+if NOT EXIST "%~dp0\lockerkeys" GOTO LOCK
 if EXIST "%~dp0\lockerkeys\%COMPUTERNAME%.key" GOTO UNLOCK
 exit /B
 :UNLOCK
